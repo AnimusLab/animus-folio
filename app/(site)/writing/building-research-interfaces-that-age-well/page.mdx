@@ -1,0 +1,59 @@
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Container } from "@/components/ui/container";
+import { Heading } from "@/components/ui/heading";
+import { Section } from "@/components/ui/section";
+import { Text } from "@/components/ui/text";
+
+export const metadata = {
+  title: "Governance as Code for Autonomous Systems",
+};
+
+<Section className="pt-16 sm:pt-24">
+  <Container>
+    <div className="max-w-3xl space-y-6">
+      <Button href="/writing" variant="ghost" className="px-0">
+        Back to writing
+      </Button>
+      <div className="space-y-4">
+        <Badge>Technical Essay</Badge>
+        <Heading level={1}>Governance as Code for Autonomous Systems</Heading>
+        <Text size="lg">
+          Why governance must be executable, replayable, and human-auditable if autonomous AI systems are expected to operate inside real-world constraints.
+        </Text>
+      </div>
+
+      <article className="space-y-8 border-t border-border pt-8">
+        <div className="space-y-4">
+          <p>
+            Governance systems fail when policy exists only as prose. If the control layer cannot be executed, replayed, and audited, it is not governance infrastructure.
+          </p>
+          <p>
+            Anchor was built around deterministic decision paths so runtime behavior can be inspected after the fact without relying on memory or ad hoc explanations.
+          </p>
+        </div>
+
+        <Card>
+          <Heading level={2}>Implementation notes</Heading>
+          <ul>
+            <li>Policy must be machine-checkable before it can be governed.</li>
+            <li>Deterministic replay is required for meaningful auditability.</li>
+            <li>Human approval should remain part of any governance update path.</li>
+          </ul>
+        </Card>
+
+        <div className="space-y-4">
+          <p>
+            The aim is not to produce a vague safety story. The aim is to build
+            systems that make every governed action traceable to a specific policy,
+            version, and decision chain.
+          </p>
+          <p>
+            That is what makes governance as code operational rather than aspirational.
+          </p>
+        </div>
+      </article>
+    </div>
+  </Container>
+</Section>
