@@ -10,8 +10,7 @@ export function Footer() {
           <div className="space-y-3">
             <p className="text-sm font-medium text-foreground">Tanishq Dasari</p>
             <p className="max-w-xl text-sm leading-7 text-muted-foreground">
-              Research portfolio for governance infrastructure, autonomous AI systems,
-              and technical writing at AnimusLab.
+              Currently building trustworthy AI infrastructure at AnimusLab. Open to Software Engineering opportunities.
             </p>
           </div>
 

@@ -41,6 +41,30 @@ export default function HomePage() {
                 Read Engineering Principles
               </Button>
             </div>
+
+            {/* Selected Impact List */}
+            <div className="border border-border/80 rounded-3xl bg-surface-muted/20 p-6 space-y-4 max-w-2xl">
+              <p className="text-xs font-mono text-accent uppercase tracking-wider">Selected Impact</p>
+              <ul className="space-y-2.5 text-sm text-foreground/90">
+                <li className="flex items-start gap-2.5">
+                  <span className="text-accent mt-0.5 shrink-0">✔</span>
+                  <span><strong>Built Anchor:</strong> AST compliance scanning and isolation engine supporting 118 governance rules.</span>
+                </li>
+                <li className="flex items-start gap-2.5">
+                  <span className="text-accent mt-0.5 shrink-0">✔</span>
+                  <span><strong>Published Zenodo Preprints:</strong> Authored academic and implementation briefs detailing deterministic execution boundaries.</span>
+                </li>
+                <li className="flex items-start gap-2.5">
+                  <span className="text-accent mt-0.5 shrink-0">✔</span>
+                  <span><strong>Regulatory Contributions:</strong> Submitted formal policy feedback and briefs to the FSB and RBI.</span>
+                </li>
+                <li className="flex items-start gap-2.5">
+                  <span className="text-accent mt-0.5 shrink-0">✔</span>
+                  <span><strong>Apache-2.0 &amp; MIT:</strong> Open-source projects and packages published on PyPI (<code>anchor-audit</code>, <code>shadowwatch</code>).</span>
+                </li>
+              </ul>
+            </div>
+
             <div className="grid gap-4 sm:grid-cols-3">
               {[
                 ["Primary focus", "AI governance, static analysis, runtime policy enforcement."],
@@ -116,10 +140,10 @@ export default function HomePage() {
         <Container>
           <Heading
             level={2}
-            eyebrow="Writing"
-            description="Technical essays focused on governance as code, runtime enforcement, and model risk management."
+            eyebrow="Journal"
+            description="Lab notebook logs exploring AST patterns, static analysis false positives, and compiler tooling design decisions."
           >
-            Technical Essays
+            Engineering Journal
           </Heading>
           <div className="mt-6 grid gap-4 lg:grid-cols-3">
             {writingEntries.map((post) => (

@@ -14,15 +14,13 @@ export default function WritingPage() {
         <div className="max-w-4xl space-y-6">
           <Heading
             level={1}
-            eyebrow="Writing"
-            description="Essay-length thinking, working notes, and future MDX content."
+            eyebrow="Journal"
+            description="Engineering log entries, compiler design tradeoffs, and systems architecture decisions."
           >
-            Writing and notes
+            Engineering Journal
           </Heading>
-          <Text size="lg" className="max-w-2xl">
-            The writing area is already organized around reusable metadata,
-            stable slugs, and article pages that can later be sourced from MDX
-            without changing the surrounding layout.
+          <Text size="lg" className="max-w-2xl text-muted-foreground">
+            A repository of architectural logs and technical notes explaining the design rationale behind the systems I build.
           </Text>
         </div>
 
