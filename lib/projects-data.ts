@@ -705,6 +705,175 @@ grid audit .`,
   relatedSystems: ["Anchor", "Canon"],
 };
 
+const forge: FlagshipSystem = {
+  slug: "forge",
+  name: "FORGE",
+  category: "AI Infrastructure",
+  tagline: "File-Oriented Rust Grade Engine utilizing free cloud storage APIs.",
+  summary:
+    "FORGE is a high-performance database engine built in Rust that turns free cloud storage providers (Google Drive, MEGA, pCloud) into queryable, authenticated databases via a custom binary format and REST API.",
+  status: "Active development",
+  links: [
+    { label: "GitHub Repository", href: "https://github.com/AnimusLab/FORGE" }
+  ],
+  overview: [
+    "FORGE uses cloud storage you already own and exposes it as a database with its own binary specification, eliminating high locked-in subscription pricing tiers."
+  ],
+  problem: [
+    "Free database tiers are highly restrictive and locks developers into expensive plans.",
+    "Using cloud APIs directly for structured querying is slow and lacks schema definitions."
+  ],
+  motivation: [
+    "I built FORGE to challenge lock-in billing by utilizing free cloud storage allocations for running prototype apps and personal databases."
+  ],
+  solution: [
+    "A custom database engine with its own binary format (.forge), REST endpoints, and an in-memory index engine for fast queries."
+  ],
+  implementation: [
+    "Axum web framework, Tokio async runtime, and custom binary parsing engine in Rust."
+  ],
+  decisions: [
+    "Decoupling the storage provider syncing layer from the memory database to support multiple drive providers natively.",
+    "Designing a custom header block format to avoid parsing the entire database file for metadata checks."
+  ],
+  challenges: [
+    "Achieving transaction isolation and data durability across asynchronous cloud drive API sync cycles.",
+  ],
+  architecture: {
+    title: "Storage Engine",
+    diagram: [
+      "Client Application",
+      "  ↓ (HTTPS Request with X-Forge-Key)",
+      "FORGE REST Engine",
+      "  ↓ (In-memory Index / Binary Parse)",
+      "Custom .forge File (Disk)",
+      "  ↓ (Async Sync Worker)",
+      "Cloud Storage API (Google Drive / MEGA)"
+    ],
+    notes: [
+      "In-memory index resolves queries fast.",
+      "Syncing runs in a background thread."
+    ],
+  },
+  components: [
+    { name: "Axum REST Router", description: "Handles authentication and exposes CRUD routes." },
+    { name: "Binary Serializer", description: "Saves records to customized .forge database files." },
+    { name: "Query Engine", description: "Executes filters and projections in memory." },
+  ],
+  features: [
+    "Custom binary file format",
+    "API Key authorization (X-Forge-Key)",
+    "Google Drive storage sync",
+  ],
+  demo: {
+    title: "Insert and Query",
+    description: "Write records to collection.",
+    code: `curl -X POST http://localhost:8080/v1/data/users \\
+  -H "X-Forge-Key: secret" \\
+  -d '{"name": "Tanishq", "age": 21}'`,
+    output: ["ID: USR-893", "Status: Saved to memory index", "Sync: Google Drive update scheduled"],
+  },
+  documentation: [
+    "API Schema",
+    "Deployment guide",
+  ],
+  whitepapers: [],
+  benchmarks: [
+    "Query execution: <280µs",
+    "Rest API latency: <12ms",
+  ],
+  roadmap: {
+    shipped: ["REST endpoints", "Binary format serializer", "Memory query engine"],
+    next: ["WAL transaction log", "Google Drive syncing engine", "Railway deployment script"],
+  },
+  relatedSystems: ["QuantForge"],
+};
+
+const shadowWatch: FlagshipSystem = {
+  slug: "shadowwatch",
+  name: "Shadow Watch",
+  category: "AI Infrastructure",
+  tagline: "Passive behavioral intelligence and account takeover (ATO) detection library.",
+  summary:
+    "Shadow Watch tracks user activity, builds interest profiles, and calculates behavioral fingerprints dynamically to identify account takeovers (ATO) without active verification challenges.",
+  status: "Flagship system",
+  links: [
+    { label: "GitHub Repository", href: "https://github.com/Tanishq1030/Shadow_Watch" },
+    { label: "PyPI Package", href: "https://pypi.org/project/shadowwatch/" }
+  ],
+  overview: [
+    "Shadow Watch sits silently in the application request pipeline, constructing user interest indices and calculating login continuity scores to stop takeovers."
+  ],
+  problem: [
+    "Credential stuffing and hijacked accounts bypass standard authentication systems undetected.",
+    "Aggressive verification gates (MFA/Captchas) introduce friction for valid users."
+  ],
+  motivation: [
+    "I built Shadow Watch while working on QuantForge to passively authenticate CLI terminal sessions based on historical command signatures."
+  ],
+  solution: [
+    "Analyze sequential logs, build trust profiles, and calculate behavioral drift continuity metrics asynchronously."
+  ],
+  implementation: [
+    "Python client package, asyncpg database adapters, and statistical drift matching algorithms."
+  ],
+  decisions: [
+    "Making the library database-agnostic so developers can plug it into PostgreSQL, SQLite, or MySQL.",
+    "Decoupling telemetry collection from analysis routes to keep request-response cycles fast."
+  ],
+  challenges: [
+    "Preventing false positives caused by sudden, legitimate changes in user browsing context.",
+  ],
+  architecture: {
+    title: "Watch Pipeline",
+    diagram: [
+      "Inbound Request",
+      "  ↓ (Surveillance Middleware)",
+      "Shadow Watch Logger",
+      "  ↙             ↘",
+      "Database Sink    Continuity Evaluator",
+      "  ↓             ↓",
+      "Aggregated Profile  Trust Verification Score"
+    ],
+    notes: [
+      "Continuity checks take less than 1ms.",
+      "Operates fully asynchronously."
+    ],
+  },
+  components: [
+    { name: "Surveillance Middleware", description: "Intercepts request payloads silently." },
+    { name: "Fingerprinter", description: "Computes user behavioral hash signatures." },
+    { name: "Continuity Engine", description: "Evaluates logins against historical patterns." },
+  ],
+  features: [
+    "Passive activity logging",
+    "Adaptive login trust scoring",
+    "ATO prevention integration",
+  ],
+  demo: {
+    title: "ATO Check",
+    description: "Verify login context.",
+    code: `from shadowwatch import ShadowWatch
+sw = ShadowWatch(database_url="postgresql://localhost/db")
+await sw.calculate_continuity("user_123")`,
+    output: ["Continuity Score: 0.84", "Status: Stable", "ATO Risk: Low"],
+  },
+  documentation: [
+    "FastAPI integration guide",
+    "Database setup guidelines",
+  ],
+  whitepapers: [],
+  benchmarks: [
+    "Trust score compilation: <850µs",
+    "Middleware overhead: <1.1ms",
+  ],
+  roadmap: {
+    shipped: ["Silent logging adapter", "Trust profiling engine", "PostgreSQL database schemas"],
+    next: ["Behavioral divergence classification", "Pre-auth intent analysis", "Django adapter coverage"],
+  },
+  relatedSystems: ["QuantForge"],
+};
+
 export const flagshipSystems: FlagshipSystem[] = [
   anchor,
   canon,
@@ -713,6 +882,8 @@ export const flagshipSystems: FlagshipSystem[] = [
   anchorgrid,
   nexxus,
   gridCli,
+  forge,
+  shadowWatch,
 ];
 
 export function getFlagshipSystemBySlug(systemSlug: string) {
