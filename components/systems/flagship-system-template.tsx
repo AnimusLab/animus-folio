@@ -53,7 +53,7 @@ export function FlagshipSystemTemplate({ system }: { system: FlagshipSystem }) {
 
       <Section>
         <Container>
-          <div className="grid gap-4 lg:grid-cols-3">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             <Card id={sectionIds.overview} className="space-y-3">
               <Heading level={2}>Overview</Heading>
               {system.overview.map((paragraph) => (
@@ -73,9 +73,41 @@ export function FlagshipSystemTemplate({ system }: { system: FlagshipSystem }) {
                 ))}
               </ul>
             </Card>
+            <Card className="space-y-3">
+              <Heading level={2}>Motivation</Heading>
+              {system.motivation.map((paragraph) => (
+                <Text key={paragraph} size="sm">
+                  {paragraph}
+                </Text>
+              ))}
+            </Card>
             <Card id={sectionIds.solution} className="space-y-3">
               <Heading level={2}>Solution</Heading>
               {system.solution.map((paragraph) => (
+                <Text key={paragraph} size="sm">
+                  {paragraph}
+                </Text>
+              ))}
+            </Card>
+            <Card className="space-y-3">
+              <Heading level={2}>Implementation</Heading>
+              {system.implementation.map((paragraph) => (
+                <Text key={paragraph} size="sm">
+                  {paragraph}
+                </Text>
+              ))}
+            </Card>
+            <Card className="space-y-3">
+              <Heading level={2}>Engineering Decisions</Heading>
+              {system.decisions.map((paragraph) => (
+                <Text key={paragraph} size="sm">
+                  {paragraph}
+                </Text>
+              ))}
+            </Card>
+            <Card className="space-y-3 md:col-span-2 lg:col-span-3">
+              <Heading level={2}>Challenges &amp; Lessons</Heading>
+              {system.challenges.map((paragraph) => (
                 <Text key={paragraph} size="sm">
                   {paragraph}
                 </Text>
@@ -188,12 +220,14 @@ export function FlagshipSystemTemplate({ system }: { system: FlagshipSystem }) {
               </ul>
             </Card>
             <Card id={sectionIds.whitepapers} className="space-y-3">
-              <Heading level={2}>Whitepapers</Heading>
+              <Heading level={2}>Papers &amp; Consultation Briefs</Heading>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 {system.whitepapers.map((item) => (
-                  <li key={item} className="flex gap-3">
+                  <li key={item.label} className="flex gap-3">
                     <span className="mt-2 h-1.5 w-1.5 rounded-full bg-foreground" />
-                    <span>{item}</span>
+                    <a href={item.href} className="underline hover:text-foreground transition-colors">
+                      {item.label}
+                    </a>
                   </li>
                 ))}
               </ul>

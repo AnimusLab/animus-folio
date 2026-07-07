@@ -7,10 +7,11 @@ import type { WritingEntry } from "@/types/writing";
 
 export const navigationItems = [
   { label: "Home", href: "/" },
-  { label: "Systems", href: "/systems" },
+  { label: "Projects", href: "/projects" },
   { label: "Research", href: "/research" },
-  { label: "Publications", href: "/publications" },
   { label: "Writing", href: "/writing" },
+  { label: "Principles", href: "/principles" },
+  { label: "Open Source", href: "/open-source" },
   { label: "Timeline", href: "/timeline" },
   { label: "Now", href: "/now" },
   { label: "Resume", href: "/resume" },
@@ -234,8 +235,8 @@ export const resumeSkills = [
 export const contactMethods = [
   {
     label: "Email",
-    value: "tanishq@animuslab.dev",
-    href: "mailto:tanishq@animuslab.dev",
+    value: "tan@animuslab.dev",
+    href: "mailto:tan@animuslab.dev",
     summary: "Best for research collaboration, technical review, and governance infrastructure inquiries.",
   },
   {

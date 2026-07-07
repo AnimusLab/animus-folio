@@ -33,7 +33,11 @@ export interface FlagshipSystem {
   links: SystemLink[];
   overview: string[];
   problem: string[];
+  motivation: string[];
   solution: string[];
+  implementation: string[];
+  decisions: string[];
+  challenges: string[];
   architecture: {
     title: string;
     diagram: string[];
@@ -48,7 +52,7 @@ export interface FlagshipSystem {
     output: string[];
   };
   documentation: string[];
-  whitepapers: string[];
+  whitepapers: SystemLink[];
   benchmarks: string[];
   roadmap: {
     shipped: string[];

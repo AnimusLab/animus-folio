@@ -5,43 +5,44 @@ import { Container } from "@/components/ui/container";
 import { Heading } from "@/components/ui/heading";
 import { Section } from "@/components/ui/section";
 import { Text } from "@/components/ui/text";
-import { systemCategories } from "@/lib/systems-data";
+import { systemCategories } from "@/lib/projects-data";
+import { CompliancePlayground } from "@/components/projects/compliance-playground";
 
-export default function SystemsPage() {
+export default function ProjectsPage() {
   return (
     <Section className="pt-16 sm:pt-24">
       <Container>
         <div className="max-w-4xl space-y-6">
-          <Badge>Systems</Badge>
+          <Badge>Work Archive</Badge>
           <Heading
             level={1}
-            description="AnimusLab is organized as an ecosystem of systems, not a flat project gallery."
+            description="Engineering notebooks, dynamic compliance layers, and protocol-level security implementations."
           >
-            Systems and infrastructure
+            Engineering Projects
           </Heading>
           <Text size="lg" className="max-w-2xl">
-            Anchor, Canon, and Governance Hub are the flagship systems. Everything else supports them or extends the lab's broader AI and developer infrastructure.
+            A comprehensive list of systems I have built or maintain, grouped by architectural layer. Click on any system to read its technical case study.
           </Text>
         </div>
 
-        <div className="mt-12 space-y-8">
+        <div className="mt-12 space-y-12">
           {systemCategories.map((category) => (
             <section key={category.title} className="space-y-4">
-              <div className="max-w-3xl space-y-2">
+              <div className="max-w-3xl space-y-2 border-b border-border pb-2">
                 <Heading level={2}>{category.title}</Heading>
-                <Text>{category.summary}</Text>
+                <Text size="sm" className="text-muted-foreground">{category.summary}</Text>
               </div>
-              <div className="grid gap-4 lg:grid-cols-3">
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 {category.items.map((item) => {
                   const card = (
-                    <Card className="space-y-4">
+                    <Card className="h-full space-y-4 hover:border-foreground/30 transition-colors">
                       <div className="flex items-start justify-between gap-4">
                         <div className="space-y-2">
                           <div className="flex items-center gap-2">
                             <p className="text-sm font-medium text-foreground">{item.name}</p>
                             {item.badge ? <Badge variant="muted">{item.badge}</Badge> : null}
                           </div>
-                          <Text>{item.description}</Text>
+                          <Text size="sm">{item.description}</Text>
                         </div>
                       </div>
                     </Card>
@@ -59,6 +60,17 @@ export default function SystemsPage() {
             </section>
           ))}
         </div>
+
+        {/* Interactive Playground Section */}
+        <section className="mt-20 space-y-4">
+          <div className="max-w-3xl space-y-2 border-b border-border pb-2">
+            <Heading level={2}>Policy AST Evaluation Simulator</Heading>
+            <Text size="sm" className="text-muted-foreground">
+              Interact with the live AST match parser below to see how anchor-audit evaluates rulesets.
+            </Text>
+          </div>
+          <CompliancePlayground />
+        </section>
       </Container>
     </Section>
   );

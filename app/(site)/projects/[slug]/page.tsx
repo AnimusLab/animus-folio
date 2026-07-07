@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { FlagshipSystemTemplate } from "@/components/systems/flagship-system-template";
-import { flagshipSystems, getFlagshipSystemBySlug } from "@/lib/systems-data";
+import { flagshipSystems, getFlagshipSystemBySlug } from "@/lib/projects-data";
 
 export function generateStaticParams() {
   return flagshipSystems.map((system) => ({ slug: system.slug }));
@@ -20,12 +20,12 @@ export async function generateMetadata({
   }
 
   return {
-    title: system.name,
+    title: `${system.name} — Case Study`,
     description: system.summary,
   };
 }
 
-export default async function SystemPage({
+export default async function ProjectPage({
   params,
 }: Readonly<{
   params: Promise<{ slug: string }>;

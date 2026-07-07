@@ -30,8 +30,7 @@ export function Footer() {
             </div>
             <div className="space-y-2">
               <p className="font-medium text-foreground">Contact</p>
-              <p>tanishq@animuslab.dev</p>
-              <p>tan.animuslab.dev</p>
+              <p>tan@animuslab.dev</p>
             </div>
           </div>
         </div>

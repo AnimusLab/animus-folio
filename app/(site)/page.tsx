@@ -12,38 +12,43 @@ import {
   timelineEntries,
   writingEntries,
 } from "@/lib/site-data";
-import { flagshipSystems, systemCategories } from "@/lib/systems-data";
+import { systemCategories } from "@/lib/projects-data";
 import { formatDate } from "@/utils/formatDate";
 
 export default function HomePage() {
+  const flagshipSystems = systemCategories.flatMap(c => c.items.filter(i => i.featured));
+
   return (
     <>
       <Section className="pt-16 sm:pt-24 lg:pt-28">
         <Container>
           <div className="max-w-4xl space-y-8">
-            <Badge>AnimusLab Research Portfolio</Badge>
+            <Badge>Personal Research &amp; Engineering Archive</Badge>
             <div className="space-y-5">
               <Heading level={1} className="max-w-3xl">
-                Building deterministic governance infrastructure for autonomous AI systems.
+                Tanishq Dasari<span className="terminal-cursor" />
               </Heading>
-              <Text size="lg" className="max-w-2xl">
-                Tanishq Dasari is a computer science student and Founder & Research Engineer at AnimusLab. This portfolio documents ongoing research, engineering work, publications, technical essays, and long-term projects centered on AI governance, runtime policy enforcement, constitutional AI, and deterministic execution.
+              <Text size="lg" className="max-w-2xl text-muted-foreground">
+                I am a Computer Engineering student and backend engineer from Solapur, Maharashtra, India. I enjoy building systems that remain understandable as they grow.
+              </Text>
+              <Text className="max-w-2xl">
+                Most of my work revolves around backend infrastructure, static analysis, AI governance, runtime policy enforcement, developer tooling, and knowledge systems. Rather than building isolated applications, I design infrastructure that helps developers build safer and more reliable software.
               </Text>
             </div>
             <div className="flex flex-wrap gap-3">
-              <Button href="/research">View research program</Button>
-              <Button href="/contact" variant="outline">
-                Contact research lab
+              <Button href="/projects">Explore Projects</Button>
+              <Button href="/principles" variant="outline">
+                Read Engineering Principles
               </Button>
             </div>
             <div className="grid gap-4 sm:grid-cols-3">
               {[
-                ["Primary focus", "AI governance, runtime enforcement, deterministic replay."],
-                ["Projects", "Anchor, Canon, and Governance Hub."],
-                ["Lab direction", "Research infrastructure for autonomous AI systems."],
+                ["Primary focus", "AI governance, static analysis, runtime policy enforcement."],
+                ["Key projects", "Anchor, Canon, AnchorGrid, and Shadow Watch."],
+                ["Verifiability", "Every claim is backed by open-source code and papers."],
               ].map(([label, value]) => (
-                <Card key={label} className="space-y-2">
-                  <p className="text-sm text-muted-foreground">{label}</p>
+                <Card key={label} className="space-y-2 card-hover-effect">
+                  <p className="text-xs font-mono text-muted-foreground uppercase tracking-wider">{label}</p>
                   <p className="text-sm font-medium text-foreground">{value}</p>
                 </Card>
               ))}
@@ -58,107 +63,51 @@ export default function HomePage() {
             <div className="space-y-6">
               <Heading
                 level={2}
-                eyebrow="Systems"
-                description="The ecosystem is organized by system importance, with Anchor, Canon, and Governance Hub treated as the public flagship layer."
+                eyebrow="Work"
+                description="I document my systems work as complete engineering case studies rather than simple summaries."
               >
-                Flagship systems
+                Flagship Projects
               </Heading>
               <div className="grid gap-4">
-                {flagshipSystems.map((system) => (
-                  <Card key={system.slug} className="space-y-4">
+                {flagshipSystems.slice(0, 4).map((system) => (
+                  <Card key={system.slug} className="space-y-4 card-hover-effect">
                     <div className="flex flex-wrap items-center gap-2">
                       <p className="text-sm font-medium text-foreground">{system.name}</p>
-                      <Badge variant="muted">Flagship</Badge>
+                      <Badge variant="muted">{system.badge || "Flagship"}</Badge>
                     </div>
-                    <Text>{system.summary}</Text>
-                    <Button href={`/systems/${system.slug}`} variant="ghost" className="px-0">
-                      Read documentation
-                    </Button>
+                    <Text size="sm">{system.description}</Text>
+                    {system.href ? (
+                      <Button href={system.href} variant="ghost" className="px-0 text-xs font-mono">
+                        Read Case Study →
+                      </Button>
+                    ) : null}
                   </Card>
                 ))}
               </div>
             </div>
 
-            <Card className="space-y-5 bg-surface-muted">
-              <Heading level={3} eyebrow="Ecosystem">
-                Support layers
-              </Heading>
-              <div className="space-y-4">
-                {systemCategories.map((category) => (
-                  <div key={category.title} className="space-y-2">
-                    <p className="text-sm font-medium text-foreground">{category.title}</p>
-                    <Text size="sm">{category.summary}</Text>
-                  </div>
-                ))}
-              </div>
-              <Button href="/systems" variant="outline">
-                Open systems index
-              </Button>
-            </Card>
-          </div>
-        </Container>
-      </Section>
-
-      <Section>
-        <Container>
-          <Heading
-            level={2}
-            eyebrow="Research Areas"
-            description="Research supports the systems work and focuses on governance, deterministic execution, and human-approved control loops."
-          >
-            Core research themes
-          </Heading>
-          <div className="mt-6 grid gap-4 md:grid-cols-2">
-            {researchEntries.map((entry) => (
-              <Card key={entry.title} className="space-y-4">
-                <div className="space-y-2">
-                  <p className="text-sm font-medium text-foreground">
-                    {entry.title}
-                  </p>
-                  <Text>{entry.summary}</Text>
-                </div>
-                <p className="text-sm text-muted-foreground">
-                  {entry.focus}
-                </p>
-                <ul className="space-y-2 text-sm text-foreground">
-                  {entry.outputs.map((output) => (
-                    <li key={output} className="flex gap-3">
-                      <span className="mt-2 h-1.5 w-1.5 rounded-full bg-foreground" />
-                      <span>{output}</span>
-                    </li>
+            <div className="space-y-6">
+              <Card className="space-y-5 bg-surface-muted">
+                <Heading level={3} eyebrow="Invariants">
+                  Engineering Principles
+                </Heading>
+                <div className="space-y-4">
+                  {[
+                    ["Deterministic logic", "Software should be understandable before it is clever."],
+                    ["Explicit design", "Good architecture reduces complexity rather than hiding it."],
+                    ["Documentation as code", "Every design decision should be reproducible, reviewable, and explainable."],
+                  ].map(([title, desc]) => (
+                    <div key={title} className="space-y-1">
+                      <p className="text-sm font-medium text-foreground">{title}</p>
+                      <Text size="sm">{desc}</Text>
+                    </div>
                   ))}
-                </ul>
-              </Card>
-            ))}
-          </div>
-        </Container>
-      </Section>
-
-      <Section>
-        <Container>
-          <Heading
-            level={2}
-            eyebrow="Publications"
-            description="Release notes, technical consultations, and governance documents form the public record of the lab's work."
-          >
-            Recent publications and consultations
-          </Heading>
-          <div className="mt-6 grid gap-4 lg:grid-cols-3">
-            {publicationEntries.map((publication) => (
-              <Card key={publication.title} className="space-y-4">
-                <div className="space-y-2">
-                  <p className="text-sm font-medium text-foreground">
-                    {publication.title}
-                  </p>
-                  <Text>{publication.abstract}</Text>
                 </div>
-                <div className="flex flex-wrap gap-3 text-xs text-muted-foreground">
-                  <span>{publication.venue}</span>
-                  <span>•</span>
-                  <span>{formatDate(publication.date)}</span>
-                </div>
+                <Button href="/principles" variant="outline" className="w-full">
+                  Read Principles Page
+                </Button>
               </Card>
-            ))}
+            </div>
           </div>
         </Container>
       </Section>
@@ -168,9 +117,9 @@ export default function HomePage() {
           <Heading
             level={2}
             eyebrow="Writing"
-            description="Technical essays focus on governance as code, runtime AI safety, constitutional systems, and model risk management."
+            description="Technical essays focused on governance as code, runtime enforcement, and model risk management."
           >
-            Recent technical essays
+            Technical Essays
           </Heading>
           <div className="mt-6 grid gap-4 lg:grid-cols-3">
             {writingEntries.map((post) => (
@@ -179,7 +128,7 @@ export default function HomePage() {
                   <p className="text-sm font-medium text-foreground">
                     {post.title}
                   </p>
-                  <Text>{post.summary}</Text>
+                  <Text size="sm">{post.summary}</Text>
                 </div>
                 <div className="flex flex-wrap gap-3 text-xs text-muted-foreground">
                   <span>{formatDate(post.date)}</span>
@@ -187,7 +136,7 @@ export default function HomePage() {
                   <span>{post.readingTime}</span>
                 </div>
                 <Button href={`/writing/${post.slug}`} variant="ghost" className="px-0">
-                  Read article
+                  Read essay
                 </Button>
               </Card>
             ))}
@@ -197,10 +146,10 @@ export default function HomePage() {
 
       <Section>
         <Container>
-          <div className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
+          <div className="grid gap-6 lg:grid-cols-[1fr_1fr]">
             <Card className="space-y-5">
-              <Heading level={2} eyebrow="Timeline">
-                Recent milestones
+              <Heading level={2} eyebrow="Milestones">
+                Timeline
               </Heading>
               <div className="space-y-4">
                 {timelineEntries.slice(0, 4).map((entry) => (
@@ -218,26 +167,26 @@ export default function HomePage() {
                   </div>
                 ))}
               </div>
+              <Button href="/timeline" variant="outline" className="w-full">
+                View Timeline
+              </Button>
             </Card>
 
             <Card className="space-y-5" id="contact">
               <Heading level={2} eyebrow="Contact">
-                Research collaboration and review
+                Get in touch
               </Heading>
-              <Text>
-                For governance infrastructure work, technical reviews, open-source collaboration, or model risk management discussions, reach out directly.
+              <Text size="sm">
+                I am open to discussions about software architecture, AI risk frameworks, and systems engineering.
               </Text>
-              <div className="space-y-3 text-sm text-muted-foreground">
-                <p>
-                  Email:{" "}
-                  <Link className="text-foreground underline" href="mailto:tanishq@animuslab.dev">
-                    tanishq@animuslab.dev
-                  </Link>
-                </p>
-                <p>Availability: selective research collaborations and technical consultation.</p>
+              <div className="space-y-2 text-sm text-muted-foreground font-mono">
+                <p>Email: <Link className="text-foreground underline" href="mailto:tan@animuslab.dev">tan@animuslab.dev</Link></p>
+                <p>GitHub: <a className="text-foreground underline" href="https://github.com/Tanishq1030" target="_blank" rel="noopener noreferrer">github.com/Tanishq1030</a></p>
+                <p>LinkedIn: <a className="text-foreground underline" href="https://www.linkedin.com/in/tanishq-dasari10/" target="_blank" rel="noopener noreferrer">linkedin.com/in/tanishq-dasari10</a></p>
+                <p>X (Twitter): <a className="text-foreground underline" href="https://x.com/TanishqDasari1" target="_blank" rel="noopener noreferrer">@TanishqDasari1</a></p>
               </div>
-              <Button href="/contact" variant="outline">
-                View contact channels
+              <Button href="/contact" variant="outline" className="w-full">
+                View Contact details
               </Button>
             </Card>
           </div>
