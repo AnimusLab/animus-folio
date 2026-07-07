@@ -556,6 +556,7 @@ export function CompliancePlayground({ defaultPresetIndex = 0 }: { defaultPreset
           <span className="text-[10px] text-muted-foreground uppercase block tracking-wider">// Simulated Anchor CLI stdout</span>
           <div className="bg-[#030304] border border-border/80 rounded-2xl p-4 h-44 overflow-y-auto font-mono text-[10px] text-foreground/80 leading-normal space-y-1.5 shadow-inner">
             {consoleLogs.map((log, index) => {
+              if (typeof log !== "string") return null;
               let color = "text-muted-foreground";
               if (log.includes("[VIOLATION]")) color = "text-red-400 font-semibold";
               else if (log.includes("[HALT]")) color = "text-red-500 font-bold";
@@ -584,36 +585,39 @@ export function CompliancePlayground({ defaultPresetIndex = 0 }: { defaultPreset
           </div>
 
           <div className="space-y-4">
-            {violations.map((v, idx) => (
-              <div key={idx} className="border-l border-red-500 pl-4 space-y-2">
-                <div className="flex flex-wrap items-center gap-3">
-                  <span className="text-[10px] text-white font-bold bg-red-950/40 px-2 py-0.5 border border-red-900/40 rounded-full">
-                    {v.id}
-                  </span>
-                  <span className="text-[10px] text-foreground font-bold">
-                    {v.name}
-                  </span>
-                  <span className="text-[9px] text-red-400 border border-red-900/40 px-2 py-0.5 rounded-full bg-red-950/25">
-                    LINE {v.line}
-                  </span>
-                </div>
-                
-                <p className="text-xs text-muted-foreground font-light leading-relaxed">
-                  {v.message}
-                </p>
-                
-                {v.codeSnippet && (
-                  <div className="bg-surface border border-border p-2.5 rounded-2xl text-[10.5px] text-muted-foreground italic">
-                    Snippet: &quot;{v.codeSnippet}&quot;
+            {violations.map((v, idx) => {
+              if (!v) return null;
+              return (
+                <div key={idx} className="border-l border-red-500 pl-4 space-y-2">
+                  <div className="flex flex-wrap items-center gap-3">
+                    <span className="text-[10px] text-white font-bold bg-red-950/40 px-2 py-0.5 border border-red-900/40 rounded-full">
+                      {v.id || "UNKNOWN"}
+                    </span>
+                    <span className="text-[10px] text-foreground font-bold">
+                      {v.name || "Rule Violation"}
+                    </span>
+                    <span className="text-[9px] text-red-400 border border-red-900/40 px-2 py-0.5 rounded-full bg-red-950/25">
+                      LINE {v.line || 0}
+                    </span>
                   </div>
-                )}
-                
-                <div className="text-[10.5px] text-accent/80 leading-relaxed font-light">
-                  <strong className="text-accent/90 uppercase tracking-wider text-[9px] block mb-0.5">// Recommended Mitigation</strong>
-                  {v.mitigation}
+                  
+                  <p className="text-xs text-muted-foreground font-light leading-relaxed">
+                    {v.message}
+                  </p>
+                  
+                  {v.codeSnippet && (
+                    <div className="bg-surface border border-border p-2.5 rounded-2xl text-[10.5px] text-muted-foreground italic">
+                      Snippet: &quot;{v.codeSnippet}&quot;
+                    </div>
+                  )}
+                  
+                  <div className="text-[10.5px] text-accent/80 leading-relaxed font-light">
+                    <strong className="text-accent/90 uppercase tracking-wider text-[9px] block mb-0.5">// Recommended Mitigation</strong>
+                    {v.mitigation}
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       )}
