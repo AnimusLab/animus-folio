@@ -26,13 +26,13 @@ export const systemCategories: SystemCategory[] = [
           "Governance synchronization system for monitoring frameworks, diffing rule changes, and proposing updates.",
       },
       {
-        name: "Governance Hub",
-        slug: "governance-hub",
-        href: "/projects/governance-hub",
+        name: "Anchor Web",
+        slug: "anchor-web",
+        href: "/projects/anchor-web",
         badge: "Flagship",
         featured: true,
         description:
-          "Operational platform for governance domains, organizations, verification, and centralized audit chains.",
+          "Operational portal for constitutional capability rendering, offering distinct Spoke and Oversight view surface security.",
       },
     ],
   },
@@ -67,6 +67,15 @@ export const systemCategories: SystemCategory[] = [
         featured: true,
         description:
           "High-throughput semantic policy mapping engine that routes natural-language queries into AST constraints.",
+      },
+      {
+        name: "Open Financial LLM Leaderboard",
+        slug: "ofll",
+        href: "/projects/ofll",
+        badge: "Benchmark",
+        featured: true,
+        description:
+          "Specialized financial evaluation framework and Hugging Face space for stock prediction, risk, and sentiment models.",
       },
     ],
   },
@@ -132,17 +141,17 @@ const anchor: FlagshipSystem = {
     "Keeping execution latency down to microsecond scales during runtime policy interception."
   ],
   architecture: {
-    title: "Anchor Pipeline",
+    title: "4-Verb Constitutional Execution Cycle",
     diagram: [
-      "Application Source Code",
-      "  ↓ (Tree-sitter Parser)",
-      "Abstract Syntax Tree (AST)",
-      "  ↓ (Rule Matcher / AST Queries)",
-      "Enforcement Rules (.anchor)",
-      "  ↓ (Runtime Interceptor)",
-      "Ed25519 Signed Log File",
-      "  ↓ (Replay & Verification)",
-      "Verifiable Decision Proof"
+      "1. HANDSHAKE (Identity & proof validation)",
+      "  ↓ (Sovereign Spoke Verification)",
+      "2. INTERCEPT (Runtime interception / Tree-sitter AST scan)",
+      "  ↓ (Evaluate against .anchor rules)",
+      "3. HASH (Cryptographic commit / Ed25519 payload signing)",
+      "  ↓ (Log transition to ledger.jsonl)",
+      "4. REPLAY (Deterministic causal reconstruction)",
+      "  ↓ (Verification loop)",
+      "🔄 RECURSIVE FEEDBACK (Continuity confirmation)"
     ],
     notes: [
       "Every step is linear and deterministic.",
@@ -209,7 +218,7 @@ anchor check .`,
     shipped: ["AST scanning", "Ed25519 log signing", "PyPI release v5"],
     next: ["Dataflow variable tracking", "Multi-agent authorization chains", "VS Code extension"],
   },
-  relatedSystems: ["Canon", "Governance Hub"],
+  relatedSystems: ["Canon", "Anchor Web"],
 };
 
 const canon: FlagshipSystem = {
@@ -307,84 +316,89 @@ canon verify`,
     shipped: ["Adapters", "Diff generation", "Ledger chain"],
     next: ["Adapter framework coverage", "Automatic policy pull alerts", "Sync adapters for Anchor v6"],
   },
-  relatedSystems: ["Anchor", "Governance Hub"],
+  relatedSystems: ["Anchor", "Anchor Web"],
 };
 
-const governanceHub: FlagshipSystem = {
-  slug: "governance-hub",
-  name: "Governance Hub",
+const anchorWeb: FlagshipSystem = {
+  slug: "anchor-web",
+  name: "Anchor Web",
   category: "Governance Infrastructure",
-  tagline: "Centralized operational surface for policy monitoring and log audits.",
+  tagline: "Constitutional governance portal and Sovereign Hub-Spoke Oversight Mesh.",
   summary:
-    "Governance Hub aggregates runtime verification metadata from distributed Anchor instances, verifies cryptographic signatures, and provides policy drift tracking.",
+    "Anchor Web provides identity-driven constitutional capability rendering, offering distinct verification surfaces (Oversight and Enterprise Operations) across a secure, federated Hub-Spoke lattice topology.",
   status: "Flagship system",
-  links: [],
+  links: [
+    { label: "GitHub Repository", href: "https://github.com/Tanishq1030/anchor-web" }
+  ],
   overview: [
-    "Governance Hub brings all distributed Anchor telemetry under one control pane, tracking violations and verifying signature chains."
+    "Anchor Web brings visual oversight and execution metrics to the core Anchor engine. Using decoupled sub-domains (oversight.anchorgovernance.tech for auditors and app.anchorgovernance.tech for developers), it restricts features dynamically via backend-injected capability tokens."
   ],
   problem: [
-    "Running Anchor in production creates logs on distinct virtual servers that are tedious to aggregate.",
-    "Log aggregation pipelines can be compromised or altered by unauthorized users."
+    "Running decentralized validation logs creates security gaps if and when central monitoring portals are compromised.",
+    "A standard single-dashboard design introduces credential reuse risks and lacks structural auditor isolation."
   ],
   motivation: [
-    "To build a single place for operations and compliance teams to inspect verified, signed governance evidence without leaving their central workflow."
+    "I built anchor-web to transition Anchor from a local python CLI checking tool to an enterprise-grade SaaS oversight mesh, enabling central bank level policy compliance audits."
   ],
   solution: [
-    "Ingests Ed25519-signed decision records from agents, validates their cryptographic integrity, and presents live compliance scores."
+    "A Sovereign Hub-Spoke Lattice model where individual spoke jurisdictions communicate to a central consensus hub via encrypted Relay Gateways."
   ],
   implementation: [
-    "Built using FastAPI for high-throughput ingestion and Next.js / Tailwind CSS for the monitoring dashboard."
+    "Built using Node.js for client coordination, Aegis Bot scripting, and a Next.js operational control dashboard."
   ],
   decisions: [
-    "Using signature-based validations to authenticate incoming data payloads instead of trusting database replication."
+    "Adopting backend-driven capabilities rendering rather than standard client-side state flags to prevent dashboard bypassing.",
+    "Separating Standard and Forensic Auditor views to isolate regional financial data dynamically."
   ],
   challenges: [
-    "Handling high-throughput stream telemetry under heavy execution load without dropping events."
+    "Designing and testing Nginx reverse-proxy routes that preserve client certificates for cryptographic P2P spoke nodes."
   ],
   architecture: {
-    title: "Hub Aggregation",
+    title: "Sovereign Hub-Spoke Oversight Mesh",
     diagram: [
-      "Distributed Agents",
-      "  ↓ (Ed25519-Signed Event Streams)",
-      "Hub Telemetry Endpoint",
-      "  ↓ (Signature Validation)",
-      "Database Store",
+      "🔐 Spokes (EMEA, APAC, Americas)",
+      "  ↓ (Mesh Protocol)",
+      "⚡ Relay Gateways (AES-256)",
+      "  ↓ (Verified Tunnel)",
+      "🌐 Federated Hub Authority (BFT Consensus)",
       "  ↓",
-      "Compliance Dashboard (Next.js)"
+      "👁️ Oversight Portal Nodes (Real-time monitoring)",
+      "  ↓ (Backend Capability Injection)",
+      "Constitutional Dashboard (Gated UI)"
     ],
     notes: [
-      "Payloads are discarded if signature validation fails.",
-      "The UI highlights active violations."
+      "Access drops automatically if spoke certificate signatures mutate.",
+      "Clearance resolution happens at the gateway level."
     ],
   },
   components: [
-    { name: "Ingestion API", description: "Receives events from active agent nodes." },
-    { name: "Verifier", description: "Validates Ed25519 key hashes and chains." },
-    { name: "Dashboard UI", description: "Visualizes drift, violations, and active rules." },
+    { name: "Mesh Relay Gateway", description: "Tunnel broker with AES-256 spoke validations." },
+    { name: "Clearance Engine", description: "Injects role, visibility, and jurisdiction scopes dynamically." },
+    { name: "Aegis Bot", description: "Automated session monitoring and verification agent." },
   ],
   features: [
-    "Centralized runtime auditing",
-    "Ed25519 validation",
-    "Real-time violation alerts",
+    "Hub-Spoke lattice topology",
+    "Identity-driven portal scopes",
+    "Preserved P2P reverse-proxying",
   ],
   demo: {
-    title: "Hub Client",
-    description: "Launch the telemetry listener.",
-    code: `uvicorn hub.main:app --port 8000`,
-    output: ["Telemetry API listening on port 8000", "Verified signature for node_012"],
+    title: "Start Web Mesh",
+    description: "Launch the oversight portal gateway listener.",
+    code: `python aegis_bot.py --run-simulation --port 8080`,
+    output: ["Aegis Gateway active on 8080", "Active Spoke connections: 3", "System status: Healthy"],
   },
   documentation: [
-    "Hub API specs",
-    "Collector installation",
+    "Nginx setup guide",
+    "Oversight API layout",
   ],
   whitepapers: [],
   benchmarks: [
-    "Ingestion throughput: >5000 events/s",
-    "Signature checks: <0.5ms per payload",
+    "Capability resolution: <8ms",
+    "Mesh payload routing: <14ms",
   ],
   roadmap: {
-    shipped: ["API collector", "Next.js basic dashboard"],
-    next: ["Multi-tenant org domains", "Visual graph query builder for policies"],
+    shipped: ["Aegis bot simulator", "Nginx proxy configuration profiles"],
+    next: ["SAML 2.0 institutional authentication", "Auto-healing relay proxy reconnects"],
   },
   relatedSystems: ["Anchor", "Canon"],
 };
@@ -874,16 +888,102 @@ await sw.calculate_continuity("user_123")`,
   relatedSystems: ["QuantForge"],
 };
 
+const ofll: FlagshipSystem = {
+  slug: "ofll",
+  name: "Open Financial LLM Leaderboard",
+  category: "AI Infrastructure",
+  tagline: "Specialized zero-shot financial evaluation framework for language models.",
+  summary:
+    "The Open Financial LLM Leaderboard (OFLL) provides a transparent, zero-shot benchmarking environment tailored exclusively for models handling complex financial reports, market forecasting, and sentiment metrics.",
+  status: "Flagship system",
+  links: [
+    { label: "Hugging Face Space", href: "https://huggingface.co/spaces/finosfoundation/Open-Financial-LLM-Leaderboard" },
+    { label: "GitHub Repository", href: "https://github.com/Open-Financial-LLMs-Leaderboard" }
+  ],
+  overview: [
+    "General NLP benchmarks do not measure stock prediction capability or credit risk scoring accurately. OFLL covers seven financial categories (Information Extraction, Textual Analysis, QA, Text Generation, Risk, Forecasting, Decision-Making) using real-world datasets."
+  ],
+  problem: [
+    "Traditional AI benchmarks evaluate general conversation but fail on high-dimensional financial logic.",
+    "Evaluating model accuracy on specialized financial texts requires standardized zero-shot datasets."
+  ],
+  motivation: [
+    "Developed under the Fintech Open Source Foundation (FINOS) and SecureFinAI Lab at Columbia University to provide an authoritative model index for financial institutions."
+  ],
+  solution: [
+    "A zero-shot evaluation runner that scores financial domains and saves structured results JSON files directly to a Hugging Face space."
+  ],
+  implementation: [
+    "Gradio interface, Python evaluation scripts, and structured JSON results parsers."
+  ],
+  decisions: [
+    "Requiring explicit model SHA hash verification to prevent data-contamination and lookup cheating.",
+    "Evaluating models zero-shot to measure true context comprehension rather than prompt-engineered memorization."
+  ],
+  challenges: [
+    "Processing highly unstructured financial filing formats (Form 10-K/10-Q) into clean question-answer tokens."
+  ],
+  architecture: {
+    title: "Leaderboard Ingestion Pipeline",
+    diagram: [
+      "Hugging Face Model Submit",
+      "  ↓ (Validation / SHA Check)",
+      "Evaluation Queue (eval-queue)",
+      "  ↓ (Zero-shot Runner)",
+      "Task Evaluators (IE, TA, QA, TG, RM, FO, DM)",
+      "  ↓ (Scoring: Accuracy, MCC, ROUGE)",
+      "Structured JSON Results",
+      "  ↓",
+      "Gradio Leaderboard Interface (OFLL)"
+    ],
+    notes: [
+      "Zero-shot prevents test leakage.",
+      "Results are publicly auditable."
+    ],
+  },
+  components: [
+    { name: "Zero-Shot Evaluator", description: "Runs financial tasks against model weights." },
+    { name: "Result Parser", description: "Aggregates scores (Accuracy, F1, MCC) into JSON templates." },
+    { name: "Gradio Frontend", description: "Visualizes rankings, filters, and categories." },
+  ],
+  features: [
+    "7 specialized task categories",
+    "Zero-shot evaluation mode",
+    "Hugging Face model integration",
+  ],
+  demo: {
+    title: "Update Config",
+    description: "Initialize target evaluation parameters.",
+    code: `from src.about import Task
+task = Task("StockForecasting", "F1", "direction", category="Forecasting")`,
+    output: ["Registered task: StockForecasting", "Metric set to: F1"],
+  },
+  documentation: [
+    "OFLL contribution guidelines",
+  ],
+  whitepapers: [],
+  benchmarks: [
+    "Pipeline execution (7B model): <45 mins",
+    "Result parsing latency: <2.3s",
+  ],
+  roadmap: {
+    shipped: ["Gradio UI table", "7 task categories", "FINOS open source release"],
+    next: ["Automatic model execution pipeline", "Multi-modal document parsing support"],
+  },
+  relatedSystems: ["QuantForge"],
+};
+
 export const flagshipSystems: FlagshipSystem[] = [
   anchor,
   canon,
-  governanceHub,
+  anchorWeb,
   quantforge,
   anchorgrid,
   nexxus,
   gridCli,
   forge,
   shadowWatch,
+  ofll,
 ];
 
 export function getFlagshipSystemBySlug(systemSlug: string) {
